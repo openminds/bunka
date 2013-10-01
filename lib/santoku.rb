@@ -55,7 +55,7 @@ private
   end
 
   def self.ridley
-    @ridley ||= ridley = Ridley.new(
+    @ridley ||= Ridley.new(
       server_url: knife_config.chef_server_url,
       client_name: knife_config.node_name,
       client_key: knife_config.client_key
