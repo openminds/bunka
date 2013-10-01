@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'santoku'
+puts Santoku.run
