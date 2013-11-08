@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require './lib/santoku'
 
-require 'santoku'
-puts Santoku.run
+command = ARGV.join(' ')
+Santoku.run(command)
