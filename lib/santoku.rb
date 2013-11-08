@@ -40,6 +40,8 @@ class Santoku
       end
     end
 
+    print "\n"
+
     timeout_output_stream.each do |output|
       puts output.yellow
     end
