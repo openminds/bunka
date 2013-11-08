@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'santoku'
-  spec.version = '0.0.0'
+  spec.version = '0.0.1'
   spec.executables << 'santoku'
   spec.date = '2013-10-01'
   spec.summary = "Parrallel ssh commands over chef servers with rspec-like output"
