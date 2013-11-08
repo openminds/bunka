@@ -10,26 +10,40 @@ class Santoku
     failed_output_stream = Array.new
     timeout_output_stream = Array.new
 
-    ridley.node.all.peach(7) do |node|
+    ridley.node.all.peach(4) do |node|
       begin
-        timeout 5 do
+        timeout 10 do
           Net::SSH.start(node.chef_id, 'root', paranoid: false, forward_agent: true) do |ssh|
-            output_stream.push ssh.exec!('ls /home/')
+            output = ssh_exec!(ssh, command)
+            if output[2] != 0
+              failed_output_stream.push "#{node.chef_id}: #{output[1]} (error #{output[2]})"
+              print 'F'.red
+            else
+              output_stream.push output[0]
+              print '.'.green
+            end
           end
         end
-          print '.'.green
+
       rescue TimeoutError
         timeout_output_stream.push "#{node.chef_id}: connection timed out"
-        print 'F'.red
+        print '*'.yellow
+      rescue SocketError
+        timeout_output_stream.push "#{node.chef_id}: node does not resolve"
+        print '*'.yellow
+      rescue Errno::EHOSTUNREACH
+        timeout_output_stream.push "#{node.chef_id}: no route to host"
+        print '*'.yellow
       rescue Exception => e
-        failed_output_stream.push "#{node.chef_id}: #{e.message}"
+        failed_output_stream.push "#{node.chef_id}: #{e.inspect}"
         print 'F'.red
       end
     end
-    print "\n"
+
+    puts "\n---------------------------------------\n"
 
     timeout_output_stream.each do |output|
-      puts output.red
+      puts output.yellow
     end
 
     failed_output_stream.each do |output|
@@ -39,7 +53,7 @@ class Santoku
     puts "\n---------------------------------------\n"
 
     puts "#{'Success'.green}: #{output_stream.count}"
-    puts "#{'Timed out'.yellow}: #{timeout_output_stream.count}"
+    puts "#{'Timed out or does not resolve'.yellow}: #{timeout_output_stream.count}"
     puts "#{'Failed'.red}: #{failed_output_stream.count}"
   end
 
