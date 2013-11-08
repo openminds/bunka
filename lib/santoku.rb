@@ -5,7 +5,7 @@ require 'ridley'
 require 'yaml'
 
 class Santoku
-  def self.run
+  def self.run(command='uptime')
     output_stream = Array.new
     failed_output_stream = Array.new
     timeout_output_stream = Array.new
