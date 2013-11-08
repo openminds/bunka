@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require './lib/santoku'
 
-command = ARGV.join(' ')
-Santoku.run(command)
+command = ARGV[0]
+query = ARGV[1]
+Santoku.run(command, query)

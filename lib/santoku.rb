@@ -5,18 +5,18 @@ require 'ridley'
 require 'yaml'
 
 class Santoku
-  def self.run(command='uptime')
+  def self.run(command='uptime', query)
     output_stream = Array.new
     failed_output_stream = Array.new
     timeout_output_stream = Array.new
 
-    ridley.node.all.peach(4) do |node|
+    ridley.search(:node, query).peach(5) do |node|
       begin
         timeout 10 do
           Net::SSH.start(node.chef_id, 'root', paranoid: false, forward_agent: true) do |ssh|
             output = ssh_exec!(ssh, command)
             if output[2] != 0
-              failed_output_stream.push "#{node.chef_id}: #{output[1]} (error #{output[2]})"
+              failed_output_stream.push "#{node.chef_id} error #{output[2]}: #{output[1]}"
               print 'F'.red
             else
               output_stream.push output[0]
@@ -39,8 +39,6 @@ class Santoku
         print 'F'.red
       end
     end
-
-    puts "\n---------------------------------------\n"
 
     timeout_output_stream.each do |output|
       puts output.yellow
