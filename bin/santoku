@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require './lib/santoku'
+require 'santoku'
 
 command = ARGV[0]
 query = ARGV[1]
