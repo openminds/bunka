@@ -19,7 +19,7 @@ class Santoku
               failed_output_stream.push "#{node.chef_id} error #{output[2]}: #{output[1]}"
               print 'F'.red
             else
-              output_stream.push output[0]
+              output_stream.push "#{node.chef_id}: #{output[0]}"
               print '.'.green
             end
           end
@@ -48,6 +48,10 @@ class Santoku
 
     failed_output_stream.each do |output|
       puts output.red
+    end
+
+    output_stream.each do |output|
+      puts output.green
     end
 
     puts "\n---------------------------------------\n"
