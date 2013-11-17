@@ -1,6 +1,18 @@
 #!/usr/bin/env ruby
 require 'santoku'
+require "rubygems"
+require 'thor'
 
-command = ARGV[0]
-query = ARGV[1]
-Santoku.run(command, query)
+class SantokuCommand < Thor
+  map '-t' => :test
+
+  desc 'test COMMAND [QUERY]', 'Execute command on nodes, scoped on the given query if query is given. Query syntax should be the same as `knife search` syntax.'
+  option :invert, type: :boolean, desc: "invert matched results (DOESN'T WORK YET)", default: false
+  option :timeout, type: :numeric, desc: 'timeout interval per ssh connection (default: 15)', default: 15
+  option :'print-success', type: :boolean, desc: 'prints output of successful commands', default: false
+  def test(command, query='name:*')
+    Santoku.test(command, query, options[:timeout], options[:'print-success'], options[:'invert'])
+  end
+end
+
+SantokuCommand.start
