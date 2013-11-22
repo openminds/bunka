@@ -1,5 +1,3 @@
-require 'net/ssh'
-
 class Santoku
   class << self
     def ssh_exec!(ssh, command)
