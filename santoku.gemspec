@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.description = 'A gem to perform command over parallel ssh connections on multiple chef serverspec. Output is rspec-like.'
   spec.authors = ['Steven De Coeyer', 'Jeroen Jacobs']
   spec.email = 'tech@openminds.be'
-  spec.files = ['lib/santoku.rb', 'lib/santoku/helpers.rb', 'lib/santoku/printers.rb']
+  spec.files = `git ls-files`.split($\)
   spec.homepage = 'https://github.com/openminds/santoku'
   spec.license = 'MIT'
 
