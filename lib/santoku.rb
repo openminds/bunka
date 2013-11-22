@@ -1,7 +1,9 @@
 require 'peach'
 
+require 'santoku/chef'
 require 'santoku/helpers'
 require 'santoku/printers'
+require 'santoku/ssh'
 
 class Santoku
   class << self
@@ -23,14 +25,8 @@ class Santoku
               end
             end
           end
-        rescue TimeoutError
-          timed_out "#{node.chef_id}: connection timed out"
-        rescue Errno::ETIMEDOUT
-          timed_out "#{node.chef_id}: Operation timed out - connect(2)"
-        rescue SocketError
-          timed_out "#{node.chef_id}: node does not resolve"
-        rescue Errno::EHOSTUNREACH
-          timed_out "#{node.chef_id}: no route to host"
+        rescue TimeoutError, Errno::ETIMEDOUT, SocketError, Errno::EHOSTUNREACH => e
+          timed_out "#{node.chef_id}: #{e.message}"
         rescue Exception => e
           timed_out "#{node.chef_id}: #{e.inspect}"
         end
