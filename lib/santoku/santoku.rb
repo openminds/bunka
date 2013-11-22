@@ -2,18 +2,18 @@ require 'net/ssh'
 
 class Santoku
   class << self
-    def execute_query node
+    def execute_query chef_id
       begin
         timeout @timeout_interval do
-          Net::SSH.start(node.chef_id, 'root', paranoid: false, forward_agent: true) do |ssh|
+          Net::SSH.start(chef_id, 'root', paranoid: false, forward_agent: true) do |ssh|
             output = ssh_exec!(ssh, @command)
-            parse_output output, node.chef_id
+            parse_output output, chef_id
           end
         end
       rescue TimeoutError, Errno::ETIMEDOUT, SocketError, Errno::EHOSTUNREACH => e
-        timed_out "#{node.chef_id}: #{e.message}"
+        timed_out "#{chef_id}: #{e.message}"
       rescue Exception => e
-        timed_out "#{node.chef_id}: #{e.inspect}"
+        timed_out "#{chef_id}: #{e.inspect}"
       end
     end
 

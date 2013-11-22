@@ -16,7 +16,7 @@ class Santoku
       @invert = invert
 
       ridley.search(:node, @query).peach(5) do |node|
-        execute_query node
+        execute_query node.chef_id
       end
 
       print_summary
