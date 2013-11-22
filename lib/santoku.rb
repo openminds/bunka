@@ -15,8 +15,8 @@ class Santoku
       @verbose_success = verbose_success
       @invert = invert
 
-      ridley.search(:node, @query).peach(5) do |node|
-        execute_query node.chef_id
+      knife_search(@query).peach(5) do |fqdn|
+        execute_query fqdn
       end
 
       print_summary

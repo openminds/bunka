@@ -2,28 +2,28 @@ require 'net/ssh'
 
 class Santoku
   class << self
-    def execute_query chef_id
+    def execute_query fqdn
       begin
         timeout @timeout_interval do
-          Net::SSH.start(chef_id, 'root', paranoid: false, forward_agent: true) do |ssh|
+          Net::SSH.start(fqdn, 'root', paranoid: false, forward_agent: true) do |ssh|
             output = ssh_exec!(ssh, @command)
-            parse_output output, chef_id
+            parse_output output, fqdn
           end
         end
       rescue TimeoutError, Errno::ETIMEDOUT, SocketError, Errno::EHOSTUNREACH => e
-        timed_out "#{chef_id}: #{e.message}"
+        timed_out "#{fqdn}: #{e.message}"
       rescue Exception => e
-        timed_out "#{chef_id}: #{e.inspect}"
+        timed_out "#{fqdn}: #{e.inspect}"
       end
     end
 
-    def parse_output output, chef_id
+    def parse_output output, fqdn
       if output[2] == 0 && !invert?
-        succeeded "#{chef_id}: #{output[0]}"
+        succeeded "#{fqdn}: #{output[0]}"
       elsif output[2] != 0 && invert?
-        succeeded "#{chef_id} returned #{output[2]}: #{output[1]} #{output[0]}"
+        succeeded "#{fqdn} returned #{output[2]}: #{output[1]} #{output[0]}"
       else
-        failed "#{chef_id} returned #{output[2]}: #{output[1]} #{output[0]}"
+        failed "#{fqdn} returned #{output[2]}: #{output[1]} #{output[0]}"
       end
     end
   end
