@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.license = 'MIT'
 
   spec.add_dependency 'colorize'
+  spec.add_dependency 'net-ssh'
   spec.add_dependency 'peach'
   spec.add_dependency 'ridley'
   spec.add_dependency 'thor'
