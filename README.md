@@ -3,6 +3,8 @@ Santoku
 
 Parallel ssh commands over chef servers with rspec-like output. Santoku uses the exit codes of a command to determine whether it qualifies as a success or failure.
 
+![example](http://i.imgur.com/7kmEHjR.png)
+
 Installation
 ============
 
