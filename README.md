@@ -1,7 +1,7 @@
 Santoku
 =======
 
-Parrallel ssh commands over chef servers with rspec-like output. Santoku uses the exit codes of a command to determine whether it qualifies as a success or failure.
+Parallel ssh commands over chef servers with rspec-like output. Santoku uses the exit codes of a command to determine whether it qualifies as a success or failure.
 
 Installation
 ============
@@ -24,19 +24,19 @@ Usage
 
 Test if a given command returns 0 on all nodes:
 
-  santoku -t 'test -d /foo/bar/'
+    santoku -t 'test -d /foo/bar/'
 
 Test if a given command **does not** return 0 on nodes:
 
-  santoku -t 'php -i | grep -i memcached' --invert
+    santoku -t 'php -i | grep -i memcached' --invert
 
 Test if a given command returns 0 on all nodes, also print out the STDOUT of successfull commands:
 
-  santoku -t 'cat /etc/apache2/conf.d/ssl' --print-success
+    santoku -t 'cat /etc/apache2/conf.d/ssl' --print-success
 
 Test if a given command returns 0, scoped on certain nodes (with [knife search syntax](http://docs.opscode.com/knife_search.html)):
 
-  santoku -t 'test -f /etc/apache2/conf.d/ssl' 'recipe:apache AND listen_ports:443'
+    santoku -t 'test -f /etc/apache2/conf.d/ssl' 'recipe:apache AND listen_ports:443'
 
 ### Note
 
