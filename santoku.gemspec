@@ -1,9 +1,9 @@
 Gem::Specification.new do |spec|
   spec.name = 'santoku'
-  spec.version = '0.0.7'
+  spec.version = '1.0.0'
   spec.executables << 'santoku'
   spec.date = '2013-11-26'
-  spec.summary = 'Parrallel ssh commands over chef servers with rspec-like output'
+  spec.summary = 'Parallel ssh commands over chef servers with rspec-like output'
   spec.description = 'A gem to perform command over parallel ssh connections on multiple chef serverspec. Output is rspec-like.'
   spec.authors = ['Steven De Coeyer', 'Jeroen Jacobs']
   spec.email = 'tech@openminds.be'
