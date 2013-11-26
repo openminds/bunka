@@ -3,8 +3,8 @@ class Santoku
     def ssh_exec!(ssh, command)
       # I am not awesome enough to have made this method myself
       # Originally submitted by 'flitzwald' over here: http://stackoverflow.com/a/3386375
-      stdout_data = ""
-      stderr_data = ""
+      stdout_data = ''
+      stderr_data = ''
       exit_code = nil
 
       ssh.open_channel do |channel|
@@ -20,7 +20,7 @@ class Santoku
             stderr_data+=data
           end
 
-          channel.on_request("exit-status") do |ch,data|
+          channel.on_request('exit-status') do |ch,data|
             exit_code = data.read_long
           end
         end
