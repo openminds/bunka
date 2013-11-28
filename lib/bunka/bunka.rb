@@ -1,6 +1,6 @@
 require 'net/ssh'
 
-class Santoku
+class Bunka
   class << self
     def execute_query fqdn
       begin

@@ -1,12 +1,12 @@
 require 'peach'
 
-require 'santoku/chef'
-require 'santoku/helpers'
-require 'santoku/printers'
-require 'santoku/santoku'
-require 'santoku/ssh'
+require 'bunka/chef'
+require 'bunka/helpers'
+require 'bunka/printers'
+require 'bunka/bunka'
+require 'bunka/ssh'
 
-class Santoku
+class Bunka
   class << self
     def test command, query, timeout_interval, verbose_success, invert
       @command = command

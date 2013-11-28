@@ -1,6 +1,6 @@
 require 'chef/knife'
 
-class Santoku
+class Bunka
   class << self
     def knife_search query
       # Monkey patch Chef::Knife::UI to hide stdout

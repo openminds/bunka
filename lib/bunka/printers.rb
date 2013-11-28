@@ -1,6 +1,6 @@
 require 'colorize'
 
-class Santoku
+class Bunka
   class << self
     def print_fail
       print 'F'.red

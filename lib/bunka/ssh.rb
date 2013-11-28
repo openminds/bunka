@@ -1,4 +1,4 @@
-class Santoku
+class Bunka
   class << self
     def ssh_exec!(ssh, command)
       # I am not awesome enough to have made this method myself

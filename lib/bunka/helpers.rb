@@ -1,6 +1,6 @@
-require 'santoku/printers'
+require 'bunka/printers'
 
-class Santoku
+class Bunka
   class << self
     def failed(reason)
       failed_output_stream.push reason
