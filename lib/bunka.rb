@@ -8,9 +8,9 @@ require 'bunka/ssh'
 
 class Bunka
   class << self
-    def test command, query, timeout_interval, verbose_success, invert
-      @command = command
+    def test query, command, timeout_interval, verbose_success, invert
       @query = query
+      @command = command
       @timeout_interval = timeout_interval
       @verbose_success = verbose_success
       @invert = invert

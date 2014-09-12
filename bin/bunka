@@ -6,12 +6,12 @@ require 'thor'
 class BunkaCommand < Thor
   map '-t' => :test
 
-  desc 'test COMMAND [QUERY]', 'Execute command on nodes, scoped on the given query if query is given. Query syntax should be the same as `knife search` syntax.'
+  desc 'test QUERY COMMAND', 'Execute command on nodes, scoped on the given query. Query syntax should be the same as `knife search` syntax.'
   option :invert, type: :boolean, desc: 'invert matched results', default: false
   option :timeout, type: :numeric, desc: 'timeout interval per ssh connection (default: 15)', default: 15
   option :'print-success', type: :boolean, desc: 'prints output of successful commands', default: false
-  def test(command, query='name:*')
-    Bunka.test(command, query, options[:timeout], options[:'print-success'], options[:invert])
+  def test(query, command)
+    Bunka.test(query, command, options[:timeout], options[:'print-success'], options[:invert])
   end
 end
 
