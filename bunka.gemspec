@@ -14,6 +14,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'chef', '~> 11.0'
   spec.add_dependency 'colorize'
   spec.add_dependency 'net-ssh'
-  spec.add_dependency 'peach'
+  spec.add_dependency 'parallel'
   spec.add_dependency 'thor'
 end
