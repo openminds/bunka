@@ -1,4 +1,4 @@
-require 'peach'
+require 'parallel'
 
 require 'bunka/chef'
 require 'bunka/helpers'
@@ -15,7 +15,7 @@ class Bunka
       @verbose_success = verbose_success
       @invert = invert
 
-      knife_search(@query).peach(5) do |fqdn|
+      Parallel.map(knife_search(@query), in_threads: 15) do |fqdn|
         execute_query fqdn
       end
 
