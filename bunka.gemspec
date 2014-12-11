@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'bunka'
-  spec.version = '1.2.0'
+  spec.version = '1.3.0'
   spec.executables << 'bunka'
   spec.date = '2013-11-26'
   spec.summary = 'Parallel ssh commands over chef servers with rspec-like output'
