@@ -2,6 +2,14 @@ require 'net/ssh'
 
 class Bunka
   class << self
+    def nodes
+      if @file
+        File.readlines(@file).collect(&:strip)
+      else
+        knife_search(@query)
+      end
+    end
+
     def execute_query fqdn
       begin
         timeout @timeout_interval do
