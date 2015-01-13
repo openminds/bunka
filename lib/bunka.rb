@@ -1,30 +1,25 @@
 require 'parallel'
 
+require 'bunka/bunka'
 require 'bunka/chef'
 require 'bunka/helpers'
 require 'bunka/printers'
-require 'bunka/bunka'
 require 'bunka/ssh'
 
 class Bunka
   class << self
-    def test command, query, timeout_interval, verbose_success, invert, sequential, threads
+    def test command, query, timeout_interval, verbose_success, invert, sequential, threads, file=nil
       @command = command
       @invert = invert
       @query = query
       @sequential = sequential
-      @threads = threads
+      @threads = sequential ? 1 : threads
       @timeout_interval = timeout_interval
       @verbose_success = verbose_success
+      @file = file
 
-      if sequential
-        knife_search(@query).each do |fqdn|
-          execute_query fqdn
-        end
-      else
-        Parallel.map(knife_search(@query), in_threads: @threads) do |fqdn|
-          execute_query fqdn
-        end
+      Parallel.map(nodes, in_threads: @threads) do |fqdn|
+        execute_query fqdn
       end
 
       print_summary

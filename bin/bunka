@@ -12,8 +12,9 @@ class BunkaCommand < Thor
   option :timeout, type: :numeric, desc: 'timeout interval per ssh connection (default: 15)', default: 15
   option :threads, type: :numeric, desc: 'number of threads (default: 15)', default: 15
   option :'print-success', type: :boolean, desc: 'prints output of successful commands', default: false
+  option :'from-file', type: :string, desc: 'path to file with list of servers', default: nil
   def test(command, query='name:*')
-    Bunka.test(command, query, options[:timeout], options[:'print-success'], options[:invert], options[:sequential], options[:threads])
+    Bunka.test(command, query, options[:timeout], options[:'print-success'], options[:invert], options[:sequential], options[:threads], options[:'from-file'])
   end
 end
 
