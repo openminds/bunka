@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'bunka'
-  spec.version = '1.4.0'
+  spec.version = '1.4.1'
   spec.executables << 'bunka'
   spec.date = '2013-11-26'
   spec.summary = 'Parallel ssh commands over chef servers with rspec-like output'
@@ -17,4 +17,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'parallel'
   spec.add_dependency 'rake'
   spec.add_dependency 'thor'
+  spec.add_dependency 'rest-client'
 end
