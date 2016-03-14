@@ -12,7 +12,7 @@ class Bunka
 
     def execute_query fqdn
       begin
-        timeout @timeout_interval do
+        Timeout.timeout @timeout_interval do
           Net::SSH.start(fqdn, 'root', paranoid: false, forward_agent: true) do |ssh|
             output = ssh_exec!(ssh, @command)
             parse_output output, fqdn
