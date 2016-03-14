@@ -18,7 +18,7 @@ class Bunka
             parse_output output, fqdn
           end
         end
-      rescue TimeoutError, Errno::ETIMEDOUT, SocketError, Errno::EHOSTUNREACH => e
+      rescue Timeout::Error, Errno::ETIMEDOUT, SocketError, Errno::EHOSTUNREACH => e
         timed_out "#{fqdn}: #{e.message}"
       rescue Exception => e
         timed_out "#{fqdn}: #{e.inspect}"
